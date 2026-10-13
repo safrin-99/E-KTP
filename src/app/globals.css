@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --paper: #f4f3ed;
+  --surface: #fffefa;
+  --ink: #182d29;
+  --muted: #6f7974;
+  --line: #e1e4dc;
+  --forest: #1d5145;
+  --forest-dark: #123a32;
+  --lime: #d7e8a2;
+  --clay: #bd7959;
+  --font-ui: 'Public Sans', 'Segoe UI', sans-serif;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-code: 'DM Mono', Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select, textarea { font: inherit; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a { text-decoration: none; }
+::selection { background: #dce8bc; color: #193d34; }
+:focus-visible { outline: 3px solid #8cad7a; outline-offset: 2px; }
+* { scrollbar-color: #bec6b8 transparent; scrollbar-width: thin; }
+
+.font-display { font-family: var(--font-display); font-optical-sizing: auto; font-weight: 500; letter-spacing: -.035em; }
+.font-code { font-family: var(--font-code); }
+.app-canvas { min-height: 100vh; background: var(--paper); }
+.app-enter { animation: enter-rise .48s cubic-bezier(.2,.75,.25,1) both; }
+.enter-delay-1 { animation-delay: .05s; }
+.enter-delay-2 { animation-delay: .1s; }
+.enter-delay-3 { animation-delay: .15s; }
+.enter-delay-4 { animation-delay: .2s; }
+.stagger-in > * { animation: enter-rise .42s cubic-bezier(.2,.75,.25,1) both; }
+.stagger-in > *:nth-child(1) { animation-delay: .04s; }
+.stagger-in > *:nth-child(2) { animation-delay: .09s; }
+.stagger-in > *:nth-child(3) { animation-delay: .14s; }
+.stagger-in > *:nth-child(4) { animation-delay: .19s; }
+.stagger-in > *:nth-child(5) { animation-delay: .24s; }
+.dropdown-menu { animation: menu-pop .16s cubic-bezier(.2,.75,.25,1) both; transform-origin: top right; }
+.button-spring { transition: transform .18s cubic-bezier(.2,.8,.2,1), background-color .18s, box-shadow .18s, border-color .18s; }
+.button-spring:active { transform: translateY(1px) scale(.99); }
+.surface-lift { transition: border-color .2s, box-shadow .2s, transform .2s; }
+.surface-lift:hover { transform: translateY(-2px); border-color: #c7d0c3; box-shadow: 0 12px 30px rgba(28,54,45,.07); }
+.field-shell { transition: border-color .18s, box-shadow .18s, background-color .18s; }
+.field-shell:focus-within { border-color: #648d78; background: #fffefa; box-shadow: 0 0 0 3px rgba(100,141,120,.14); }
+.nav-link { transition: background-color .18s, color .18s, border-color .18s; }
+.menu-surface { box-shadow: 0 18px 44px rgba(22,44,36,.15), 0 2px 6px rgba(22,44,36,.05); }
+
+@keyframes enter-rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes menu-pop { from { opacity: 0; transform: translateY(-5px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes slow-drift { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-6px,0); } }
+@keyframes soft-pulse { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
+.decor-drift { animation: slow-drift 9s ease-in-out infinite; }
+.status-pulse { animation: soft-pulse 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+.animate-row { animation: enter-rise .34s cubic-bezier(.2,.75,.25,1) both; }
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff !important; color: #172d25 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .no-print, aside, header, footer { display: none !important; }
+  .app-canvas, main { min-height: 0 !important; padding: 0 !important; margin: 0 !important; max-width: none !important; }
+  .print-sheet { box-shadow: none !important; border: 1px solid #cbd6c9 !important; border-radius: 10px !important; break-inside: avoid; }
+}
